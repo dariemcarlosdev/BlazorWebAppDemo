@@ -1,4 +1,35 @@
 @page "/"
+<div class="main">
+    <h1>Blazing Pizza Demo App</h1>
+    <ul class="pizza-cards">
+        @if (specials !=null)
+        {
+            @foreach (var special in specials)
+            {
+                <li style="background-image: url('@special.ImageUrl')">
+                    <div class="pizza-info">
+                        <span class="title">@special.Name</span>
+                        @special.Description;
+                        <span class="price">@special.GetFormattedBasePrice()</span>
+                    </div>
+                </li>
+            }
+        }
+    </ul>
+</div>
 
-<h1>Blazing Pizzas</h1>
-		
+@code{
+    List<PizzaSpecial> specials = new();
+    
+    //When the page is initialized, it adds six pizzas to the array.
+    protected override void OnInitialized()
+    {
+        specials.AddRange(new List<PizzaSpecial>()
+        {
+         new PizzaSpecial { Name = "The Baconatorizor", BasePrice =  11.99M, Description = "It has EVERY kind of bacon", ImageUrl="img/pizzas/bacon.jpg"},
+         new PizzaSpecial { Name = "The Baconatorizor", BasePrice =  11.99M, Description = "It has EVERY kind of bacon", ImageUrl="img/pizzas/bacon.jpg" }
+
+
+        });
+    }
+}
