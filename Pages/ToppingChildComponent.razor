@@ -1,0 +1,38 @@
+@* To import types, non namespaces, have to use static *@
+@using static _Imports
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Card Component</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+</head>
+
+<div class="max-w-sm rounded overflow-hidden shadow-lg">
+    <div class="px-6 py-4">
+        <div class="font-bold text-xl mb-2">
+            <h3>Child Component:</h3>
+            <h2>Pizza Topping </h2>
+        </div>
+        <p class="text-gray-700 text-base">
+            <div>
+                <h2>New Topping: @topping.Name</h2>
+                <p>Ingredients: @topping.Ingredients</p>
+            </div>
+
+
+        </p>
+    </div>
+</div>
+
+
+
+
+@code {
+
+    //defining the component parameter in the child component.
+    //using custom classes in your project as component parameters.
+    //You can use that as a component parameter in the same way as a parameter value to access individual properties of the class by using dot syntax:
+    [Parameter]
+    public PizzaTopping topping { get; set; }
+}

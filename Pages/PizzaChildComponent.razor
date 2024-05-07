@@ -1,0 +1,31 @@
+﻿<head>
+    <meta charset="UTF-8" />
+    <title>Card Component</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+</head>
+
+<div class="max-w-sm rounded overflow-hidden shadow-lg">
+    <div class="px-6 py-4">
+        <div class="font-bold text-xl mb-2">
+            <h3>Child Component:</h3>
+            <h2>New Pizza</h2>
+        </div>
+        <p class="text-gray-700 text-base">
+            <div>
+                <h2>New Pizza: @PizzaName</h2>
+                <p>@PizzaDescription</p>
+            </div>
+
+
+        </p>
+    </div>
+</div>
+@code {
+    //defining the component parameter in the child component.
+    [Parameter]
+    public string PizzaName { get; set; }
+    [Parameter]
+    public string PizzaDescription { get; set; }
+
+}

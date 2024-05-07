@@ -14,7 +14,7 @@ namespace BlazingPizza.Model
 
         public Address DeliveryAddress { get; set; } = new Address();
 
-        public List<Pizza> Pizzas { get; set; } = new List<Pizza>();
+        public List<Pizza> Pizzas { get; set; } = [];
 
         public decimal GetTotalPrice() => Pizzas.Sum(p => p.GetTotalPrice());
 
