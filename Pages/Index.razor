@@ -1,8 +1,10 @@
 @page "/"
+@using BlazingPizza.Model
+
 <div class="main">
     <h1>Blazing Pizza Demo App</h1>
     <ul class="pizza-cards">
-        @if (specials !=null)
+        @if (specials != null)
         {
             @foreach (var special in specials)
             {
