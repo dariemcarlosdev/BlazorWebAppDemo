@@ -1,0 +1,37 @@
+﻿@page "/specials"
+@inject HttpClient HttpClient
+@inject NavigationManager NavigationManager
+@using static _Imports
+
+<div class="main">
+    <h1>Accessing JSON data from Component</h1>
+    <ul class="pizza-cards">
+        @if (specials != null)
+        {
+            @foreach (var special in specials)
+            {
+                <li style="background-image: url('@special.ImageUrl')">
+                    <div class="pizza-info">
+                        <span class="title">@special.Name</span>
+                        @special.Description;
+                        <span class="price">@special.GetFormattedBasePrice()</span>
+                    </div>
+                </li>
+            }
+        }
+    </ul>
+</div>
+
+@code {
+
+
+    List<PizzaSpecial> specials = new();
+    protected override async Task OnInitializedAsync()
+    {
+
+        const string V = "api/specials";
+        specials = await HttpClient.GetFromJsonAsync<List<PizzaSpecial>>(NavigationManager.BaseUri + V);
+
+    }
+
+}
