@@ -1,0 +1,11 @@
+﻿@page "/dealofday"
+@using BlazingPizza.Pages
+<div><h3>DealOfDay Component</h3></div>
+
+@* This markup will take string value *@
+<CascadingValue Name="DealName" Value=@("ThrowbackThursday")>
+    <!-- Any descendant component rendered here will be able to access the cascading value. -->
+    <PizzaToppingParentComponent>
+    </PizzaToppingParentComponent>
+</CascadingValue>
+
