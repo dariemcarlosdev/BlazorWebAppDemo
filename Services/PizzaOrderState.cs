@@ -20,6 +20,8 @@ namespace BlazingPizza.Services
 
         public PizzaSaleState PizzaSaleState { get; private set; }
 
+        public int PizzaOrderedToday { get; set; } = 0;
+
         // to create a pizza
         // When a customer selects a pizza, the server executes the ShowConfigurePizzaDialog method that creates a pizza with the special pizza data and sets the showingConfigureDialog variable to true.
         public void ShowConfigurePizzaDialog(PizzaSpecial special)
@@ -46,11 +48,9 @@ namespace BlazingPizza.Services
             Order.Pizzas.Add(configuringPizza);
             configuringPizza = null;
             showingConfigureDialog = false;
-            //IncrementSales();
+            PizzaOrderedToday++;
         }
 
 
-
-        private void IncrementSales() => PizzaSaleState.PizzaSoldToday++;
     }
 }

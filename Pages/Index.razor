@@ -10,6 +10,7 @@
 <div class="main">
     <h1>Blazing Pizza Demo App</h1>
     <p>Today we have sold this pizzas: @PizzaSaleState.PizzaSoldToday</p>
+    <p>Your orders today: @OrderStateService.PizzaOrderedToday</p>
     <ul>
        
     </ul>
@@ -37,7 +38,7 @@
 
 @if (OrderStateService.showingConfigureDialog)
 {
-    <ConfigurePizzaDialog OnCancel="OrderStateService.CancelConfigurePizzaDialog" OnConfirm="OrderStateService.ConfirmConfigurePizzaDialog" Pizza="OrderStateService.configuringPizza" />
+    <ConfigurePizzaDialogBox OnCancel="OrderStateService.CancelConfigurePizzaDialog" OnConfirm="OrderStateService.ConfirmConfigurePizzaDialog" Pizza="OrderStateService.configuringPizza" />
 }
 
 @code{
