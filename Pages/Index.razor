@@ -2,6 +2,9 @@
 @using BlazingPizza.Model
 @using BlazingPizza.Services
 @inject PizzaSaleState SalesState
+@inject HttpClient HttpClient
+@inject NavigationManager NavigationManager
+
 
 <div class="main">
     <h1>Blazing Pizza Demo App</h1>
@@ -14,7 +17,8 @@
         {
             @foreach (var special in specials)
             {
-                <li style="background-image: url('@special.ImageUrl')">
+                @* Allow the webpage to call the server - side ShowConfigurePizzaDialog method by allowing customers to select a pizza *@
+                <li @onclick="@(()=> ShowConfigurePizzaDialog(special))" style="background-image: url('@special.ImageUrl')">
                     <div class="pizza-info">
                         <span class="title">@special.Name</span>
                         @special.Description;
@@ -27,20 +31,36 @@
     </ul>
 </div>
 
+@if (showingConfigureDialog)
+{
+    <ConfigurePizzaDialog Pizza="configuringPizza"></ConfigurePizzaDialog>
+}
+
 @code{
     List<PizzaSpecial> specials = new();
+    Pizza configuringPizza;
+    bool showingConfigureDialog;
 
     private void IncrementSales() => SalesState.PizzaSoldToday++;
 
     //When the page is initialized, it adds six pizzas to the array.
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        specials.AddRange(new List<PizzaSpecial>()
-        {
-         new PizzaSpecial { Name = "The Baconatorizor", BasePrice =  11.99M, Description = "It has EVERY kind of bacon", ImageUrl="img/pizzas/bacon.jpg"},
-         new PizzaSpecial { Name = "The Baconatorizor", BasePrice =  11.99M, Description = "It has EVERY kind of bacon", ImageUrl="img/pizzas/bacon.jpg" }
+        const string getSpecials = "api/specials";
+        specials = await HttpClient.GetFromJsonAsync<List<PizzaSpecial>>(NavigationManager.BaseUri + getSpecials);
+    }
+    // to create a pizza
+    // When a customer selects a pizza, the server executes the ShowConfigurePizzaDialog method that creates a pizza with the special pizza data and sets the showingConfigureDialog variable to true.
+    void ShowConfigurePizzaDialog(PizzaSpecial special)
+    {
+        configuringPizza = new Pizza()
+            {
+                Special = special,
+                Id = special.Id,
+                Size = Pizza.DefaultSize
 
+            };
 
-        });
+            showingConfigureDialog = true;
     }
 }
