@@ -27,6 +27,7 @@ namespace BlazingPizza.Model
         public bool Vegetarian { get; set; }
 
         public bool Vegan { get; set; }
+        public List<PizzaTopping> Topping { get; internal set; }
 
         public decimal GetBasePrice()
         {
