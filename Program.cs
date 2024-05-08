@@ -11,6 +11,7 @@
 
 //This is a Blazor project based on Blazor Server hosting Model.
 using BlazingPizza.DAL;
+using BlazingPizza.Services;
 using Microsoft.AspNetCore.Builder;
 using static System.Formats.Asn1.AsnWriter;
 
@@ -22,6 +23,9 @@ builder.Services.AddServerSideBlazor();
 builder.Services.AddHttpClient();
 //AddSqlite service registers the new PizzaStoreContext and provides the filename for the SQLite database
 builder.Services.AddSqlite<PizzaStoreDemoContext>("Data Source=pizza.db");
+
+// Registering AppState class as scoped Service.
+builder.Services.AddScoped<PizzaSaleState>();
 
 var app = builder.Build();
 
