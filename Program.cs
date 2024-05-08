@@ -27,7 +27,7 @@ builder.Services.AddSqlite<PizzaStoreDemoContext>("Data Source=pizza.db");
 // Registering AppState class as scoped Service.
 builder.Services.AddScoped<PizzaSaleState>();
 
-builder.Services.AddScoped<PizzaOrderState>();
+builder.Services.AddScoped<PizzaOrderStateService>();
 
 var app = builder.Build();
 
