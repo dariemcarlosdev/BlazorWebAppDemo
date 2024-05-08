@@ -8,6 +8,12 @@
 
 
 <div class="main">
+    <h1>My favorite pizza is: @favPizza</h1>
+    <p>
+        Enter favorite pizza:
+        @* To bind a control, you would use the @bind directive *@
+        <input @bind-value="favPizza" @bind-value:event="oninput" />
+    </p>
     <h1>Blazing Pizza Demo App</h1>
     <p>Today we have sold this pizzas: @PizzaSaleState.PizzaSoldToday</p>
     <p>Your orders today: @OrderStateService.PizzaOrderedToday</p>
@@ -42,6 +48,7 @@
 }
 
 @code{
+    private string favPizza { get; set; } = "Margherita";
     List<PizzaSpecial> specials = [];
     // Pizza configuringPizza;
     // bool showingConfigureDialog;
