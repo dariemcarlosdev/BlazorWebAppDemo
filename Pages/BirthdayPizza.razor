@@ -1,0 +1,16 @@
+﻿@page "/birthdaypizza"
+
+
+<h1>Order a pizza for your birthday!</h1>
+<p>
+    Enter Birth date:
+    <input @bind="birthday" @bind:format="dd/MM/yyyy" />
+</p>
+
+@code {
+    /*
+     * At the time of writing, format strings are only supported with date values. Currency formats, number formats, and other formats might be added in the future. 
+     * To check the latest information on binding formats, see Format strings in the Blazor documentation.
+     */
+    private DateTime birthday { get; set; } = new(2000,1,1);
+}
