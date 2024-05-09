@@ -13,9 +13,9 @@ namespace BlazingPizza.Services
     //To manage the state of the order.the app shows the configuration dialog and it'll allow you to cancel or move on to ordering the pizza
     public class OrderStateService
     {
-        public bool showingConfigureDialog { get; private set; }
+        public bool ShowingConfigureDialog { get; private set; }
         //you can GET the configuringPizza value from outside the class. (because its public) private set means you only can set the value of configuringPizza inside the class.
-        public Pizza configuringPizza { get; private set; }
+        public Pizza ConfiguringPizza { get; private set; }
         public Order Order { get; private set; } = new Order();
 
         public SaleStateService PizzaSaleState { get; private set; }
@@ -26,28 +26,28 @@ namespace BlazingPizza.Services
         // When a customer selects a pizza, the server executes the ShowConfigurePizzaDialog method that creates a pizza with the special pizza data and sets the showingConfigureDialog variable to true.
         public void ShowConfigurePizzaDialog(PizzaSpecial special)
         {
-            configuringPizza = new()
+            ConfiguringPizza = new()
             {
                 Special = special,
                 SpecialId = special.Id,
                 Size = Pizza.DefaultSize,
-                Topping = new List<PizzaTopping>()
+                Topping = []
 
             };
 
-            showingConfigureDialog = true;
+            ShowingConfigureDialog = true;
         }
         public void CancelConfigurePizzaDialog()
         {
-                configuringPizza = null;
-                showingConfigureDialog = false;
+            ConfiguringPizza = null;
+                ShowingConfigureDialog = false;
         }
 
         public void ConfirmConfigurePizzaDialog()
         {
-            Order.Pizzas.Add(configuringPizza);
-            configuringPizza = null;
-            showingConfigureDialog = false;
+            Order.Pizzas.Add(ConfiguringPizza);
+            ConfiguringPizza = null;
+            ShowingConfigureDialog = false;
             PizzaOrderedToday++;
         }
 
