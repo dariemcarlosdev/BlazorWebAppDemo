@@ -40,6 +40,7 @@
 
         specials = await HttpClient.GetFromJsonAsync<List<PizzaSpecial>>(NavigationManager.BaseUri + V);
 
+        // Use the QueryHelpers class from the Microsoft.AspNetCore.WebUtilities to parse query string.
         if (QueryHelpers.ParseQuery(uri.Query).TryGetValue("extratopping",out var extraTopping))
         {
             ToppingName = System.Convert.ToString(extraTopping);
