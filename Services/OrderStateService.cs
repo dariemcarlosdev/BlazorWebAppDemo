@@ -11,14 +11,14 @@ namespace BlazingPizza.Services
     Unlike component parameters and cascading parameters,values in AppState are available to all components in the application
      */
     //To manage the state of the order.the app shows the configuration dialog and it'll allow you to cancel or move on to ordering the pizza
-    public class PizzaOrderStateService
+    public class OrderStateService
     {
         public bool showingConfigureDialog { get; private set; }
         //you can GET the configuringPizza value from outside the class. (because its public) private set means you only can set the value of configuringPizza inside the class.
         public Pizza configuringPizza { get; private set; }
         public Order Order { get; private set; } = new Order();
 
-        public PizzaSaleState PizzaSaleState { get; private set; }
+        public SaleStateService PizzaSaleState { get; private set; }
 
         public int PizzaOrderedToday { get; set; } = 0;
 
