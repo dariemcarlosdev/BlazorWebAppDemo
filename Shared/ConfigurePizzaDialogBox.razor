@@ -1,6 +1,14 @@
 ﻿@inject HttpClient HttpClient
 
-@* This component is a dialog that shows the selected special pizza and allows the customer to select the pizza size *@
+@* This component is a dialog box that shows the selected special pizza and allows the customer to select the pizza size
+
+Why adding the @bind="Pizza.Size" code provide so much functionality? 
+If we examine the whole of the ConfigurePizzaDialog.razor code, we'll see that we had already connected the other elements to the pizza's properties.
+For example, the price updates because of this code:
+
+Price: <span class="price">@(Pizza.GetFormattedTotalPrice())</span>
+The price updates as the pizza size changes because the method on the pizza GetFormattedTotalPrice() uses the pizza size to calculate the total price.
+ *@
 <div class="dialog-container">
     <div class="dialog">
         <div class="dialog-title">
@@ -9,10 +17,10 @@
         </div>
         <form class="dialog-body">
             <div>
-                <label>Size:</label>
-                <input type="range" min="@Pizza.MinimumSize" max="@Pizza.MaximumSize" step="1" />
+                <label>Pizza Size:</label>
+                <input type="range" min="@Pizza.MinimumSize" max="@Pizza.MaximumSize" step="1" @bind="Pizza.Size" @bind:event="oninput">
                 <span class="size-label">
-                    @(Pizza.Size)" (£@(Pizza.GetFormattedTotalPrice()))
+                    @(Pizza.Size)" <strong>($@(Pizza.GetFormattedTotalPrice()))</strong>
                 </span>
             </div>
         </form>
