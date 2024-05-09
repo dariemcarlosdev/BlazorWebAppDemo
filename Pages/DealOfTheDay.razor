@@ -1,11 +1,36 @@
-﻿@page "/dealofday"
+﻿@page "/dealofday/{pizzaname}"
 @using BlazingPizza.Pages
-<div><h3>DealOfDay Component</h3></div>
+@inject NavigationManager navmng
+<div>
+    <div>
+        <h3>DealOfDay Component</h3>
+    </div>
+    <p>I want to order a: @PizzaName</p>
+    <div>
+        <button class="btn-link" @onclick="NavigateToPaymentPage">
+            Buy this pizza!
+        </button>
+    </div>
 
-@* This markup will take string value *@
-<CascadingValue Name="DealName" Value=@("ThrowbackThursday")>
-    <!-- Any descendant component rendered here will be able to access the cascading value. -->
-    <PizzaToppingParentComponent>
-    </PizzaToppingParentComponent>
-</CascadingValue>
+
+    @* This markup will take string value *@
+    <CascadingValue Name="DealName" Value=@("ThrowbackThursday")>
+        <!-- Any descendant component rendered here will be able to access the cascading value. -->
+        <PizzaToppingParentComponent>
+        </PizzaToppingParentComponent>
+    </CascadingValue>
+</div>
+
+@code{
+
+    [Parameter]
+    public string PizzaName{get; set;}
+
+    private void NavigateToPaymentPage()    
+    {
+        // NavigationManager object to send your users to another component
+        //For this code, a component with the @page "/specials" directive will handle this route.
+        navmng.NavigateTo("specials");
+    }
+}
 
