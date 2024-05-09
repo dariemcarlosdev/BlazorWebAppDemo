@@ -3,11 +3,15 @@
 @page "/specials-pizzas"
 
 @inject HttpClient HttpClient
+@* Obtaining location information and navigating with NavigationManager *@
 @inject NavigationManager NavigationManager
+@* Use the QueryHelpers class from the Microsoft.AspNetCore.WebUtilities assembly to access the query string,and parse the full URI *@
+@using Microsoft.AspNetCore.WebUtilities
 @using static _Imports
 
 <div class="main">
     <h1>Accessing JSON data from Component</h1>
+    <p>I want to add this topping: @ToppingName</p>
     <ul class="pizza-cards">
         @if (specials != null)
         {
@@ -27,13 +31,20 @@
 
 @code {
 
-
+    private string ToppingName { get; set; }
     List<PizzaSpecial> specials = new();
     protected override async Task OnInitializedAsync()
     {
-
         const string V = "api/specials";
+        var uri = NavigationManager.ToAbsoluteUri(NavigationManager.Uri);
+
         specials = await HttpClient.GetFromJsonAsync<List<PizzaSpecial>>(NavigationManager.BaseUri + V);
+
+        if (QueryHelpers.ParseQuery(uri.Query).TryGetValue("extratopping",out var extraTopping))
+        {
+            ToppingName = System.Convert.ToString(extraTopping);
+        }
+
 
     }
 
