@@ -1,5 +1,24 @@
 @inherits LayoutComponentBase
-<div class="content">
-    @Body
+@inject NavigationManager NavigationManager
+<div class="content container">
+    <NavLink class="top-bar " href=@HomePageURI Match="NavLinkMatch.Prefix">Home Page</NavLink>
+    <div class=" content container-fluid">
+        @Body
+    </div>
 </div>
+
+@code {
+
+
+    public string HomePageURI { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        HomePageURI = NavigationManager.BaseUri;
+
+
+
+    }
+
+}
 
