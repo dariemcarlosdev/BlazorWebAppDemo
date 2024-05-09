@@ -51,6 +51,11 @@ namespace BlazingPizza.Services
             PizzaOrderedToday++;
         }
 
+        public void RemoveConfiguredPizzaFromOrder(Pizza pizza) 
+        { 
+            Order.Pizzas.Remove(pizza);
+        }
+
 
     }
 }

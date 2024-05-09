@@ -63,6 +63,7 @@
                     <div class="item-price">
                         @configuredPizza.GetFormattedTotalPrice()
                     </div>
+                    <a @onclick="@(()=> OrderStateService.RemoveConfiguredPizzaFromOrder(configuredPizza))" class="delete-item">x</a>
                 </div>
             }
         </div>
@@ -86,7 +87,7 @@
     private string favPizza { get; set; } = "Margherita";
     List<PizzaSpecial> specials = [];
 
-    //=>(lambda operator )used to create lambda expression(anonymous func containing expressions and statments),
+    //=>(lambda operator )used to create lambda expression(anonymous func. containing expressions and statments),
     //  can be used to create delegate or expression tree types.
     Order order => OrderStateService.Order;
 
