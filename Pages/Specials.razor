@@ -32,13 +32,15 @@
 @code {
 
     private string ToppingName { get; set; }
+
     List<PizzaSpecial> specials = new();
+
     protected override async Task OnInitializedAsync()
-    {
-        const string V = "api/specials";
+        {
+        const string jsonData = "api/specials";
         var uri = NavigationManager.ToAbsoluteUri(NavigationManager.Uri);
 
-        specials = await HttpClient.GetFromJsonAsync<List<PizzaSpecial>>(NavigationManager.BaseUri + V);
+        specials = await HttpClient.GetFromJsonAsync<List<PizzaSpecial>>(NavigationManager.BaseUri + jsonData);
 
         // Use the QueryHelpers class from the Microsoft.AspNetCore.WebUtilities to parse query string.
         if (QueryHelpers.ParseQuery(uri.Query).TryGetValue("extratopping",out var extraTopping))
