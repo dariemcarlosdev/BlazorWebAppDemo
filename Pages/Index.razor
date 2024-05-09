@@ -1,10 +1,10 @@
 @page "/"
 @using BlazingPizza.Model
 @using BlazingPizza.Services
-@inject PizzaSaleState PizzaSaleState
+@inject SaleStateService PizzaSaleState
 @inject HttpClient HttpClient
 @inject NavigationManager NavigationManager
-@inject PizzaOrderStateService OrderStateService
+@inject OrderStateService OrderStateService
 
 
 <div class="main">
@@ -42,14 +42,55 @@
     </ul>
 </div>
 
-@if (OrderStateService.showingConfigureDialog)
+@if (OrderStateService.ShowingConfigureDialog)
 {
-    <ConfigurePizzaDialogBox OnCancel="OrderStateService.CancelConfigurePizzaDialog" OnConfirm="OrderStateService.ConfirmConfigurePizzaDialog" Pizza="OrderStateService.configuringPizza" />
+    <ConfigurePizzaDialogBox OnCancel="OrderStateService.CancelConfigurePizzaDialog" OnConfirm="OrderStateService.ConfirmConfigurePizzaDialog" Pizza="OrderStateService.ConfiguringPizza" />
 }
 
+@* sidebar that will display all the pizzas that a customer has added to their order. *@
+@* This HTML adds a sidebar to the page. If there are any pizzas in OrderStateService.Order, it displays them. If there are no orders, customers are prompted to add som *@
+
+<div class="sidebar">
+    @if (order.Pizzas.Any())
+    {
+        <div class="order-contents">
+            <h2>Here your order</h2>
+
+            @foreach (var configuredPizza in order.Pizzas)
+            {
+                <div class="cart-item">
+                    <div class="title">@(configuredPizza.Size)" @configuredPizza.Special.Name</div>
+                    <div class="item-price">
+                        @configuredPizza.GetFormattedTotalPrice()
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="empty-cart">Choose a pizza<br>to get started</div>
+    }
+
+    <div class="order-total @(order.Pizzas.Any() ? "" : "hidden")">
+        Total:
+        <span class="total-price">@order.GetFormattedTotalPrice()</span>
+        <a href="checkout" class="@(OrderStateService.Order.Pizzas.Count == 0 ? "btn btn-warning disabled" : "btn btn-warning")">
+            Order >
+        </a>
+    </div>
+</div>
+
 @code{
+
     private string favPizza { get; set; } = "Margherita";
     List<PizzaSpecial> specials = [];
+
+    //=>(lambda operator )used to create lambda expression(anonymous func containing expressions and statments),
+    //  can be used to create delegate or expression tree types.
+    Order order => OrderStateService.Order;
+
+
     // Pizza configuringPizza;
     // bool showingConfigureDialog;
 
