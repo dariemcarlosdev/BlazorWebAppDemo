@@ -1,7 +1,7 @@
 ﻿@page "/pizza-toppings"
 @using BlazingPizza.Pages
-@* In this parent component, you set parameter values by using attributes of the child component's tags. You set simple components directly. With a parameter based on a custom class, 
-you use inline C# code to create a new instance of that class and set its values *@
+@* In this parent component, you set parameter values by using attributes of the child component's tags. You set simple components directly. 
+    With a parameter based on a custom class, you use inline C# code to create a new instance of that class and set its values *@
 
 <head>
     <meta charset="UTF-8" />
@@ -10,15 +10,15 @@ you use inline C# code to create a new instance of that class and set its values
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 </head>
 
-    <div class="max-w-sm rounded overflow-hidden shadow-lg">
+<div class="max-w-sm overflow-hidden shadow-lg">
         <div class="px-6 py-4">
 
         <h2>Sharing info. thru Cascading param: cascading param: @DealName</h2>
             <div class="font-bold text-xl mb-2">
-            <h2>Parent Component</h2>
-            <h1>Our Latest Pizzas and Topping</h1>
+            <h2>Parent Component:<p>PizzaToppingParentComponent</p></h2>
             </div>
             <div>
+            <h2>Our Latest Pizzas and Topping</h2>
             </div>
             <div class="text-gray-700 text-base">
             <PizzaChildComponent PizzaName="Hawaiian" PizzaDescription="The one with pineapple" />
