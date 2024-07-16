@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace BlazingPizza.Model
+﻿namespace BlazingPizza.Model
 {
     public class OrderWithStatus
     {

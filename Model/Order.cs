@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace BlazingPizza.Model
+﻿namespace BlazingPizza.Model
 {
     public class Order
     {

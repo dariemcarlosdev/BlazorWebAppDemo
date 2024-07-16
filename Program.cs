@@ -12,8 +12,6 @@
 //This is a Blazor project based on Blazor Server hosting Model.
 using BlazingPizza.DAL;
 using BlazingPizza.Services;
-using Microsoft.AspNetCore.Builder;
-using static System.Formats.Asn1.AsnWriter;
 
 var builder = WebApplication.CreateBuilder(args);
 

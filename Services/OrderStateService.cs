@@ -1,7 +1,4 @@
 ﻿using BlazingPizza.Model;
-using Humanizer;
-using System.ComponentModel;
-using System.Configuration;
 
 namespace BlazingPizza.Services
 {
@@ -40,7 +37,7 @@ namespace BlazingPizza.Services
         public void CancelConfigurePizzaDialog()
         {
             ConfiguringPizza = null;
-                ShowingConfigureDialog = false;
+            ShowingConfigureDialog = false;
         }
 
         public void ConfirmConfigurePizzaDialog()
@@ -51,8 +48,8 @@ namespace BlazingPizza.Services
             PizzaOrderedToday++;
         }
 
-        public void RemoveConfiguredPizzaFromOrder(Pizza pizza) 
-        { 
+        public void RemoveConfiguredPizzaFromOrder(Pizza pizza)
+        {
             Order.Pizzas.Remove(pizza);
         }
 
